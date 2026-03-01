@@ -295,9 +295,50 @@
     .filters {
       display: flex;
       gap: 8px;
-      margin-bottom: 48px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
+
+    /* ─── Sub-filters (Sports drill-down) ─── */
+    .subfilters {
+      display: flex;
+      gap: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      transition: max-height 0.35s ease, opacity 0.3s ease, margin-bottom 0.35s ease;
+    }
+    .subfilters.visible {
+      max-height: 60px;
+      opacity: 1;
+      margin-bottom: 32px;
+    }
+    .sf-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: none;
+      padding: 4px 20px 4px 0;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .sf-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .sf-btn:hover, .sf-btn.active { color: var(--white); }
+    .sf-btn.active::after { width: calc(100% - 20px); }
     .f-btn {
       padding: 9px 26px;
       border: 1px solid rgba(255,255,255,0.1);
@@ -736,6 +777,10 @@
       <button class="f-btn" data-filter="street">Street</button>
       <button class="f-btn" data-filter="portrait">Portrait</button>
     </div>
+    <div class="subfilters" id="sportsSub">
+      <button class="sf-btn active" data-sub="all">All</button>
+      <button class="sf-btn" data-sub="baseball">Baseball</button>
+    </div>
 
     <!--
       ╔══════════════════════════════════════════════════════════════╗
@@ -748,38 +793,38 @@
     <div class="gallery" id="gallery">
 
       <!-- SPORTS -->
-      <div class="g-item" data-category="sports"
-           data-src="images/sports/web/KHS08814.jpg"
+      <div class="g-item" data-category="sports" data-subcategory="baseball"
+           data-src="images/sports/baseball/web/KHS08814.jpg"
            data-title="The House" >
-        <img src="images/sports/web/KHS08814.jpg" loading="lazy" alt="The House" />
+        <img src="images/sports/baseball/web/KHS08814.jpg" loading="lazy" alt="The House" />
         <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">The House</div></div></div>
       </div>
 
-      <div class="g-item" data-category="sports"
-           data-src="images/sports/web/KHS08994.jpg"
+      <div class="g-item" data-category="sports" data-subcategory="baseball"
+           data-src="images/sports/baseball/web/KHS08994.jpg"
            data-title="Lights On" >
-        <img src="images/sports/web/KHS08994.jpg" loading="lazy" alt="Lights On" />
+        <img src="images/sports/baseball/web/KHS08994.jpg" loading="lazy" alt="Lights On" />
         <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">Lights On</div></div></div>
       </div>
 
-      <div class="g-item" data-category="sports"
-           data-src="images/sports/web/KHS08995.jpg"
+      <div class="g-item" data-category="sports" data-subcategory="baseball"
+           data-src="images/sports/baseball/web/KHS08995.jpg"
            data-title="Eye in the Sky" >
-        <img src="images/sports/web/KHS08995.jpg" loading="lazy" alt="Eye in the Sky" />
+        <img src="images/sports/baseball/web/KHS08995.jpg" loading="lazy" alt="Eye in the Sky" />
         <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">Eye in the Sky</div></div></div>
       </div>
 
-      <div class="g-item" data-category="sports"
-           data-src="images/sports/web/KHS09012.jpg"
-           data-title="Before the Storm" >
-        <img src="images/sports/web/KHS09012.jpg" loading="lazy" alt="Before the Storm" />
-        <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">Before the Storm</div></div></div>
+      <div class="g-item" data-category="sports" data-subcategory="baseball"
+           data-src="images/sports/baseball/web/KHS09012.jpg"
+           data-title="After the Storm" >
+        <img src="images/sports/baseball/web/KHS09012.jpg" loading="lazy" alt="After the Storm" />
+        <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">After the Storm</div></div></div>
       </div>
 
-      <div class="g-item" data-category="sports"
-           data-src="images/sports/web/KHS08813.jpg"
+      <div class="g-item" data-category="sports" data-subcategory="baseball"
+           data-src="images/sports/baseball/web/KHS08813.jpg"
            data-title="The Gates" >
-        <img src="images/sports/web/KHS08813.jpg" loading="lazy" alt="The Gates" />
+        <img src="images/sports/baseball/web/KHS08813.jpg" loading="lazy" alt="The Gates" />
         <div class="g-overlay"><div class="g-meta"><div class="g-cat">Sports</div><div class="g-name">The Gates</div></div></div>
       </div>
 
@@ -1025,23 +1070,56 @@
     /* ═══════════════════════════════════════════
        GALLERY FILTER
     ═══════════════════════════════════════════ */
-    const fBtns  = document.querySelectorAll('.f-btn');
-    const gItems = document.querySelectorAll('.g-item');
+    const fBtns    = document.querySelectorAll('.f-btn');
+    const sfBtns   = document.querySelectorAll('.sf-btn');
+    const gItems   = document.querySelectorAll('.g-item');
+    const sportsSub = document.getElementById('sportsSub');
+    let activeSub  = 'all';
 
     // trigger entrance animation on load
     gItems.forEach((item, i) => {
       setTimeout(() => item.classList.add('on'), 200 + i * 60);
     });
 
+    function applyFilters(cat, sub) {
+      gItems.forEach(item => {
+        let show;
+        if (cat === 'all') {
+          show = true;
+        } else if (cat === 'sports') {
+          show = sub === 'all'
+            ? item.dataset.category === 'sports'
+            : item.dataset.category === 'sports' && item.dataset.subcategory === sub;
+        } else {
+          show = item.dataset.category === cat;
+        }
+        item.classList.toggle('hidden', !show);
+      });
+    }
+
     fBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         fBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const f = btn.dataset.filter;
-        gItems.forEach(item => {
-          const show = f === 'all' || item.dataset.category === f;
-          item.classList.toggle('hidden', !show);
-        });
+        if (f === 'sports') {
+          sportsSub.classList.add('visible');
+        } else {
+          sportsSub.classList.remove('visible');
+          activeSub = 'all';
+          sfBtns.forEach(b => b.classList.remove('active'));
+          sfBtns[0].classList.add('active');
+        }
+        applyFilters(f, activeSub);
+      });
+    });
+
+    sfBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sfBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSub = btn.dataset.sub;
+        applyFilters('sports', activeSub);
       });
     });
 
