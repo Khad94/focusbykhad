@@ -4,8 +4,13 @@
 
 # Original full-res photos (too large for GitHub)
 images/sports/*.jpg
+images/sports/**/*.jpg
 images/street/*.jpg
+images/street/**/*.jpg
 images/portraits/*.jpg
+images/portraits/**/*.jpg
+images/product/*.jpg
+images/product/**/*.jpg
 
 # Dev files
 serve.py
