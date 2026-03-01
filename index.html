@@ -357,6 +357,17 @@
       color: #080808;
     }
 
+    /* ─── Full-width gallery item ─── */
+    .g-item.g-wide {
+      column-span: all;
+      margin-bottom: 10px;
+    }
+    .g-item.g-wide img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
+    }
+
     /* ─── GALLERY (masonry) ─── */
     .gallery {
       columns: 3;
@@ -902,7 +913,7 @@
         <div class="g-overlay"><div class="g-meta"><div class="g-cat">Product</div><div class="g-name">G-Shock</div></div></div>
       </div>
 
-      <div class="g-item" data-category="product"
+      <div class="g-item g-wide" data-category="product"
            data-src="images/product/web/Nike_Blazer_77_-_Normal_Size_(no_crop).jpg"
            data-title="The 77" >
         <img src="images/product/web/Nike_Blazer_77_-_Normal_Size_(no_crop).jpg" loading="lazy" alt="The 77" />
