@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Original full-res photos (too large for GitHub)
+images/sports/*.jpg
+images/street/*.jpg
+images/portraits/*.jpg
+
+# Dev files
+serve.py
+.claude/
