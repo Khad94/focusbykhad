@@ -128,17 +128,15 @@
     .lang-btn {
       background: none;
       border: none;
-      color: var(--muted);
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: 18px;
       cursor: none;
-      transition: color 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
       padding: 0;
+      opacity: 0.45;
+      line-height: 1;
     }
-    .lang-btn.active { color: var(--accent); }
-    .lang-btn:hover  { color: var(--white); }
+    .lang-btn.active { opacity: 1; transform: scale(1.15); }
+    .lang-btn:hover  { opacity: 0.85; }
     .lang-sep { color: rgba(255,255,255,0.18); font-size: 8px; }
 
     /* hamburger (mobile) */
@@ -786,9 +784,9 @@
       <li><a href="#contact" onclick="closeNav()" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="lang-switch">
-      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn active" data-lang="en">🇬🇧</button>
       <span class="lang-sep">·</span>
-      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="fr">🇫🇷</button>
     </div>
   </nav>
 
