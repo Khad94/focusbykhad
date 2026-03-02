@@ -128,9 +128,14 @@ Two-level filter: category → subcategory
 - `user-select: none` + `-webkit-user-select: none` on `.g-item` and `img`
 
 ### Git / Deploy
-- GitHub → Netlify auto-deploy on every push to `main`
+- GitHub → auto-deploy on every push to `main`
 - Web photos are force-added (`git add -f`) to override .gitignore
 - .gitignore blocks `images/**/**/*.jpg` to prevent accidental push of full-res originals
+- **Hosting:** migrating Netlify → Cloudflare Pages (unlimited bandwidth, free)
+  - Pages project: `focusbykhad.pages.dev`
+  - DNS on Cloudflare (nameservers: aaron + saanvi)
+  - Custom domain `focusbykhad.com` added — verifying
+  - ⚠️ Once verified: delete site from Netlify
 
 ---
 
@@ -169,7 +174,7 @@ Two-level filter: category → subcategory
 - [ ] **About photo** — replace Unsplash placeholder with real photo of Khad
 - [x] **Hero background** — set to Two Bridges (KHS08601-4.jpg) ✓
 - [ ] **Social links** — Behance and LinkedIn still `#`
-- [ ] **Hosting** — consider migrating from Netlify to Cloudflare Pages (unlimited free bandwidth) before next billing cycle
+- [ ] **Hosting** — Cloudflare Pages set up, domain verifying → delete Netlify when confirmed ⚠️
 
 ---
 
