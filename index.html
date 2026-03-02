@@ -403,6 +403,12 @@
     @media (max-width: 960px)  { .gallery { columns: 2; } }
     @media (max-width: 560px)  { .gallery { columns: 1; } }
 
+    .g-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
     .g-item {
       break-inside: avoid;
       margin-bottom: 10px;
@@ -1489,9 +1495,7 @@
     applyLang(currentLang);
 
     // Prevent right-click, long-press and drag-save on gallery images
-    document.addEventListener('contextmenu', e => {
-      if (e.target.closest('.g-item')) e.preventDefault();
-    });
+    document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('dragstart', e => {
       if (e.target.closest('.g-item')) e.preventDefault();
     });
