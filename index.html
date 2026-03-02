@@ -1492,9 +1492,20 @@
     document.addEventListener('dragstart', e => {
       if (e.target.closest('.g-item')) e.preventDefault();
     });
+    // Long-press detection — block save menu but allow short tap (lightbox)
+    let longPressTimer = null;
     document.addEventListener('touchstart', e => {
-      if (e.target.closest('.g-item')) e.target.closest('.g-item').addEventListener('touchend', ev => ev.preventDefault(), { once: true });
+      const item = e.target.closest('.g-item');
+      if (!item) return;
+      longPressTimer = setTimeout(() => { longPressTimer = null; }, 500);
     }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (longPressTimer === null && e.target.closest('.g-item')) {
+        e.preventDefault(); // was a long press — block save menu
+      }
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    });
   </script>
 </body>
 </html>
