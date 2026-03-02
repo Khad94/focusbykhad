@@ -1,5 +1,5 @@
 # Focus by Khad — Project Notes
-> Last updated: March 2, 2026
+> Last updated: March 3, 2026
 > This file captures all key decisions, creative choices, and technical context for the portfolio site.
 > Read this at the start of any new session to get up to speed fast.
 
@@ -8,8 +8,8 @@
 ## 🌐 Site Overview
 - **URL:** focusbykhad.com
 - **Repo:** https://github.com/Khad94/focusbykhad.git
-- **Hosting:** Netlify (auto-deploys on every `git push origin main`)
-- **Domain registrar:** Porkbun
+- **Hosting:** Cloudflare Pages (auto-deploys on every `git push origin main`)
+- **Domain registrar:** Porkbun (DNS managed by Cloudflare)
 - **Stack:** Pure HTML / CSS / Vanilla JS — no frameworks, no build step
 - **Languages:** EN / FR (JS i18n switcher, localStorage persistence)
 
@@ -131,11 +131,13 @@ Two-level filter: category → subcategory
 - GitHub → auto-deploy on every push to `main`
 - Web photos are force-added (`git add -f`) to override .gitignore
 - .gitignore blocks `images/**/**/*.jpg` to prevent accidental push of full-res originals
-- **Hosting:** migrating Netlify → Cloudflare Pages (unlimited bandwidth, free)
+- **Hosting:** Cloudflare Pages ✅ (migrated from Netlify — unlimited bandwidth, free)
   - Pages project: `focusbykhad.pages.dev`
   - DNS on Cloudflare (nameservers: aaron + saanvi)
-  - Custom domain `focusbykhad.com` added — verifying
-  - ⚠️ Once verified: delete site from Netlify
+  - Custom domain `focusbykhad.com` — active + SSL verified ✅
+  - Cloudflare "Block AI training bots" — enabled ✅
+  - ⚠️ Netlify still active — cannot delete until contact form is migrated
+  - Contact form uses `data-netlify="true"` → must migrate to **Web3Forms** first
 
 ---
 
@@ -144,6 +146,12 @@ Two-level filter: category → subcategory
 ### Removed
 - **Merch section** — deactivated (code commented out), may return later
 - **Hero eyebrow** ("Photography & Design") — removed entirely after Design/Merch was dropped
+
+### Visibility Tweaks (March 3, 2026)
+- `.hero-by` → `font-weight: 700` (was 300) — "by Khad" now bold
+- `.nav-links a` → `color: rgba(255,255,255,0.7)` (was `var(--muted)` = #777) — nav links brighter
+- `.hero-sub` → `color: rgba(255,255,255,0.75)` (was opacity 0.45) — Sports · Street · Portrait more visible
+- `.hero-cta p` → `color: rgba(255,255,255,0.65)` (was `var(--muted)`) — scroll text more visible
 
 ### FR Copy Choices
 - "Travaux" → **"Photos"** (nav link, more direct)
@@ -174,7 +182,7 @@ Two-level filter: category → subcategory
 - [ ] **About photo** — replace Unsplash placeholder with real photo of Khad
 - [x] **Hero background** — set to Two Bridges (KHS08601-4.jpg) ✓
 - [ ] **Social links** — Behance and LinkedIn still `#`
-- [ ] **Hosting** — Cloudflare Pages set up, domain verifying → delete Netlify when confirmed ⚠️
+- [ ] **Contact form** — migrate from Netlify Forms → Web3Forms (250 free/month), then delete Netlify ⚠️
 
 ---
 
