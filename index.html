@@ -424,6 +424,9 @@
       transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
                   filter 0.4s ease;
       filter: brightness(0.88) saturate(0.9);
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
     }
     .g-item:hover img {
       transform: scale(1.07);
@@ -1480,6 +1483,14 @@
 
     // Apply saved or default language on load
     applyLang(currentLang);
+
+    // Prevent right-click and drag-save on gallery images
+    document.addEventListener('contextmenu', e => {
+      if (e.target.closest('.g-item')) e.preventDefault();
+    });
+    document.addEventListener('dragstart', e => {
+      if (e.target.closest('.g-item')) e.preventDefault();
+    });
   </script>
 </body>
 </html>
