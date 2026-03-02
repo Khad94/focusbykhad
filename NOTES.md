@@ -1,5 +1,5 @@
 # Focus by Khad — Project Notes
-> Last updated: March 2026
+> Last updated: March 2, 2026
 > This file captures all key decisions, creative choices, and technical context for the portfolio site.
 > Read this at the start of any new session to get up to speed fast.
 
@@ -70,6 +70,9 @@ Portfolio Claude/
 | KHS09534.jpg | **Amber** | Brooklyn Bridge tower silhouetted orange sunset — near-portrait |
 | KHS09548.jpg | **Orange Line** | Staten Island Ferry at dusk — landscape |
 | KHS09634.jpg | **The Other Side** | Jersey City skyline at purple sunset — landscape |
+| KHS08685.jpg | **The Avenue** | NYC street — added March 2026 |
+| KHS09729.jpg | **The Bravest** | FDNY — added March 2026 |
+| KHS09733.jpg | **Engine 26** | Fire station — added March 2026 |
 
 > First Light and Two Bridges are same vantage point (Manhattan Bridge looking toward Brooklyn Bridge) but different times of day. Kept both intentionally.
 
@@ -111,6 +114,19 @@ Two-level filter: category → subcategory
 - Language saved in `localStorage`
 - `EN · FR` toggle in nav
 
+### Favicon
+- File: `favicon.svg` (32×32, rounded rect)
+- Dark background `#0a0a0a`, white "F" in Poppins Bold 700, gold dot `#c9a84c`
+- Linked in `<head>` as `type="image/svg+xml"`
+
+### Image Protection
+- Right-click blocked globally via `contextmenu` → `preventDefault()`
+- Android long-press blocked via same `contextmenu` event (Android fires it on long-press)
+- iOS long-press blocked via `-webkit-touch-callout: none` on `.g-item` and `img`
+- Drag-save blocked via `dragstart` → `preventDefault()` on `.g-item`
+- `pointer-events: none` on `img` — image element doesn't receive touch/pointer events directly
+- `user-select: none` + `-webkit-user-select: none` on `.g-item` and `img`
+
 ### Git / Deploy
 - GitHub → Netlify auto-deploy on every push to `main`
 - Web photos are force-added (`git add -f`) to override .gitignore
@@ -137,7 +153,7 @@ Two-level filter: category → subcategory
 - Title: `FOCUS. by Khad`
 - Subtitle (EN): `Sports · Street · Portrait`
 - Subtitle (FR): `Sport · Urbain · Portrait`
-- Background: still Unsplash placeholder → **to be replaced**
+- Background: **Two Bridges** (`KHS08601-4.jpg`) — full night shot, Manhattan Bridge vantage looking toward Brooklyn Bridge + Lower Manhattan, light trails
 
 ### About Section
 - Photo: still Unsplash placeholder → **to be replaced**
@@ -151,7 +167,7 @@ Two-level filter: category → subcategory
 - [ ] **Portrait photos** — replace 4 Unsplash placeholders with real shots
 - [ ] **Football photos** — add subfolder, photos, Baseball/Football sub-filter buttons
 - [ ] **About photo** — replace Unsplash placeholder with real photo of Khad
-- [ ] **Hero background** — replace Unsplash placeholder
+- [x] **Hero background** — set to Two Bridges (KHS08601-4.jpg) ✓
 - [ ] **Social links** — Behance and LinkedIn still `#`
 - [ ] **Hosting** — consider migrating from Netlify to Cloudflare Pages (unlimited free bandwidth) before next billing cycle
 
