@@ -1117,8 +1117,9 @@
     </div>
     <div class="contact-body reveal delay-1">
       <p data-i18n="contact_p">Available for commercial projects, sports events, editorial shoots, and collaborations. Let's create something worth remembering.</p>
-      <form name="contact" class="contact-form" method="POST" netlify data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
+      <form class="contact-form" id="contactForm">
+        <input type="hidden" name="access_key" value="bf18e12f-6947-4058-8f8f-24792a858dec" />
+        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
         <div class="form-row">
           <input type="text"  name="name"    placeholder="Your Name"       data-i18n-placeholder="form_name"    required />
           <input type="email" name="email"   placeholder="Your Email"      data-i18n-placeholder="form_email"   required />
@@ -1498,6 +1499,41 @@
     document.addEventListener('dragstart', e => {
       if (e.target.closest('.g-item')) e.preventDefault();
     });
+
+    // Web3Forms contact form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = contactForm.querySelector('.form-submit');
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '...';
+
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(contactForm)
+          });
+          const data = await res.json();
+          if (data.success) {
+            btn.textContent = '✓';
+            contactForm.reset();
+            applyLang(currentLang);
+            setTimeout(() => {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }, 3000);
+          } else {
+            btn.textContent = 'Error';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Error';
+          btn.disabled = false;
+        }
+      });
+    }
   </script>
 </body>
 </html>
