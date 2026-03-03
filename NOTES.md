@@ -136,8 +136,8 @@ Two-level filter: category → subcategory
   - DNS on Cloudflare (nameservers: aaron + saanvi)
   - Custom domain `focusbykhad.com` — active + SSL verified ✅
   - Cloudflare "Block AI training bots" — enabled ✅
-  - ⚠️ Netlify still active — cannot delete until contact form is migrated
-  - Contact form uses `data-netlify="true"` → must migrate to **Web3Forms** first
+  - Netlify deleted ✅ — no longer needed
+- **Contact form:** Web3Forms ✅ (access key in index.html, notifications → Gmail + khad94@orange.fr)
 
 ---
 
@@ -182,7 +182,7 @@ Two-level filter: category → subcategory
 - [ ] **About photo** — replace Unsplash placeholder with real photo of Khad
 - [x] **Hero background** — set to Two Bridges (KHS08601-4.jpg) ✓
 - [ ] **Social links** — Behance and LinkedIn still `#`
-- [ ] **Contact form** — migrate from Netlify Forms → Web3Forms (250 free/month), then delete Netlify ⚠️
+- [x] **Contact form** — migrated to Web3Forms ✅, Netlify deleted ✅
 
 ---
 
